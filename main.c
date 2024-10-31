@@ -46,6 +46,20 @@ void initLEDs(void) {
     GPIO_PORTF_DEN_R |= RED_LED | BLUE_LED | GREEN_LED; // Enable digital function on LED pins
 }
 
+void controlLED(char colorCode) {
+    GPIO_PORTF_DATA_R &= ~(RED_LED | BLUE_LED | GREEN_LED); // Turn off all LEDs
+
+    // Turn on LED based on the received color code
+    if (colorCode == 'R' || colorCode == 'r') {
+        GPIO_PORTF_DATA_R |= RED_LED; // Red LED on
+    }
+    else if (colorCode == 'B' || colorCode == 'b') {
+        GPIO_PORTF_DATA_R |= BLUE_LED; // Blue LED on
+    }
+    else if (colorCode == 'G' || colorCode == 'g') {
+        GPIO_PORTF_DATA_R |= GREEN_LED; // Green LED on
+    }
+}
 
 int main(void) {
     initUART0();  // Initialize UART0 settings
